@@ -1,3 +1,4 @@
+"use strict"
 // Заполнить массив из 10 элементов случайными целыми числами от 100 до 200
 
 function getRandomArr() {
@@ -19,26 +20,41 @@ console.log(getRandomArr());
 // Поле isMale заполняется рандомно значениями true или false.
 
 
-/*function Users(amount) {
-  this.amount = amount;
-  this.email = function email() {
-    let amount = this.amount;
-    for (let i = 0; i < amount; i++) 
-    return "user${i}@gmail.com";
-  };
-  this.age = function age() {
-    let minAge = 12;
-    let maxAge = 50;
-    for (let i = minAge; i < maxAge; i++) {
-      return (this.age = Math.floor(Math.random()*maxAge));
-    }
-  };
-  this.isMale = function isMale() {
-    return (this.isMale = Math.random());
-  };
+function User(firstName, lastName, email, age, isMale, isSubscribed = false) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.email = email;
+  this.age = age;
+  this.isMale = isMale;
+  this.isSubscribed = isSubscribed;
 }
 
-let users1 = new Users(20);
-console.log(users1.email());
-console.log(users1.age());
-console.log(users1.isMale()); */
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomUsers(amount) {
+  const usersArray = [];
+  for (let i = 0; i < amount; i++) {
+    usersArray.push(
+      new User(
+        `Name${i}`,
+        `Name${i}`,
+        ` user${i}@gmail.com`,
+        getRandomIntInclusive(12, 50),
+        Math.random() < 0.5,
+        Math.random() < 0.5
+      )
+    );
+  }
+  return usersArray;
+}
+
+console.log(getRandomUsers(15));
+
+
+
+
+
